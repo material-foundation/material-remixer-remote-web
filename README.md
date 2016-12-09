@@ -1,6 +1,6 @@
 # Remixer Remote for Web
 
-In progress.  Not ready for use.
+In progress. Not ready for use.
 
 ## State of development
 
