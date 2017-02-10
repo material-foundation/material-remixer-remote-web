@@ -26,3 +26,7 @@
 .page-content {
   padding: 40px;
 }
+
+.mdl-card__title {
+  display: none;
+}

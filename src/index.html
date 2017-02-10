@@ -18,28 +18,54 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Remixer</title>
-  <link rel="stylesheet" href="material.min.css">
+  <title>Remixer Remote</title>
+  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="styles.css">
-  <script src="material.min.js"></script>
-  <script src="remixer.min.js"></script>
+  <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+
+  <!-- <link rel="stylesheet" href="../node_modules/material-design-lite/material.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script src="../node_modules/material-design-lite/material.min.js"></script> -->
+
+  <!--<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script> -->
 </head>
 
 <body>
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
-        <img src="remixer.svg" alt="Remixer Remote" height="40px;" />
+        <img src="remixer.svg" alt="Remixer Remote" height="32px;" />
       </div>
     </header>
     <main class="mdl-layout__content">
       <div class="page-content">
-
+        <div id="remixer-remote"></div>
       </div>
     </main>
   </div>
 
+  <script src="/assets/remoteController.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+  <script>
+    var config = {
+      apiKey: "AIzaSyDSpY_SFxddoUybdhh6cc4rEUe7o_6ek8I",
+      authDomain: "remixer-16a0b.firebaseapp.com",
+      databaseURL: "https://remixer-16a0b.firebaseio.com",
+    };
+    firebase.initializeApp(config);
+
+    var remixerDB = firebase.database().ref('remixer/6c799194');
+    remixerDB.on('child_added', function(data) {
+      remoteController.sync(data.val());
+    });
+
+    remixerDB.on('child_changed', function(data) {
+      remoteController.sync(data.val());
+    });
+
+  </script>
 </body>
 
 </html>
