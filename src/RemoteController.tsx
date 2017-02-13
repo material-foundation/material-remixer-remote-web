@@ -17,11 +17,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import "file-loader?name=[name].[ext]!./index.html";
-import "file-loader?name=[name].[ext]!./styles.css";
-import "file-loader?name=[name].[ext]!./remixer.svg";
-import "./styles.css";
-import "../node_modules/material-remixer/src/ui/styles/overlay.less";
+// import "file-loader?name=[name].[ext]!./index.html";
+// import "file-loader?name=[name].[ext]!./styles.css";
+// import "file-loader?name=[name].[ext]!./remixer.svg";
+// import "./styles.css";
+// import "../node_modules/material-remixer/src/ui/styles/overlay.less";
 
 import { remixer } from "../node_modules/material-remixer/src/core/Remixer";
 import { BooleanVariable } from "../node_modules/material-remixer/src/core/variables/BooleanVariable";
@@ -33,30 +33,53 @@ import { RangeVariable } from "../node_modules/material-remixer/src/core/variabl
 import { StringVariable } from "../node_modules/material-remixer/src/core/variables/StringVariable";
 import { Variable } from "../node_modules/material-remixer/src/core/variables/Variable";
 
-// const overlayWrapper = document.getElementById("remixer-remote");
-// let remixer: remixer = remixer.attachedInstance;
-// let variables: {[key: string]: Variable} = {};
-let variables: Variable[] = [];
+const overlayWrapper = document.getElementById("remixer-remote");
 
 class RemoteController {
 
-  private remixer: remixer = remixer.attachedInstance;
+  /**
+   * Initializes a new instance of RemoteController.
+   * @private
+   * @static
+   * @return {Remote} A new instance of RemoteController.
+   */
+  private static _sharedInstance = new RemoteController();
 
-  // private static variables: {[key: string]: Variable} = {};
-  // private static variables: Variable[] = [];
+  remixer: remixer = remixer.attachedInstance;
+  variables: Variable[] = [];
 
-  static sync(data: any): void {
-
-    let variable = this.deserialize(data);
-    if (variable) {
-      variables.push(variable);
-      // this.variables[variable.key] = variable;
-    }
-
-    redraw();
+  static start(config: {}): void {
+    this._sharedInstance.dbReference().on("value", (data: any) => {
+      this._sharedInstance.syncData(data.val());
+    });
   }
 
-  private static deserialize(data: any): Variable {
+  /**
+   * Returns a database reference to the remixer instance.
+   * @private
+   * @return {firebase.database.Reference} The firebase database reference.
+   */
+  private dbReference(): firebase.database.Reference {
+    return firebase.database().ref(`remixer/${this.getUrlParam("id")}`);
+  }
+
+  private getUrlParam(key: string): string {
+      let regex = new RegExp(`[\\?&]${key}=([^&#]*)`);
+      let results = regex.exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+
+  private syncData(data: any): void {
+    this.variables = [];
+    for (let key in data) {
+      let variable = this.deserialize(data[key]);
+      this.variables.push(variable);
+    }
+
+    this.redraw();
+  }
+
+  private deserialize(data: any): Variable {
     switch (data.dataType) {
       case DataType.BOOLEAN:
         return BooleanVariable.deserialize(data);
@@ -74,53 +97,28 @@ class RemoteController {
     }
   }
 
-  // private static get variablesArray(): Variable[] {
-  //   return Object.keys(this.variables).map((key) => this.variables[key]);
-  // }
-  //
-  // static updateVariable(variable: Variable, selectedValue: any): void {
-  //   console.log("updateVariable");
-  //   // remixer.cloneAndUpdateVariable(variable, selectedValue);
-  // }
-  //
-  // static redraw() {
-  //   ReactDOM.render(
-  //     <OverlayController
-  //       wrapperElement={overlayWrapper}
-  //       variables={this.variablesArray}
-  //       updateVariable={this.updateVariable}
-  //     />,
-  //     overlayWrapper,
-  //   );
-  // }
+  private updateVariable(variable: Variable, selectedValue: any): void {
+    if (variable.selectedValue !== selectedValue) {
+      variable.selectedValue = selectedValue;
+      this.dbReference().child(variable.key).set(variable.serialize());
+    }
+  }
 
+  private redraw(): void {
+    // Renders the OverlayController component to the overlay wrapper element.
+    ReactDOM.render(
+      <OverlayController
+        wrapperElement={overlayWrapper}
+        variables={this.variables}
+        updateVariable={this.updateVariable.bind(this)}
+      />,
+      overlayWrapper,
+    );
 
+    // We must upgrade all registered MDL components that have been created
+    // dynamically.
+    window["componentHandler"].upgradeAllRegistered();
+  }
 }
-
-function updateVariable(variable: Variable, selectedValue: any): void {
-  // remixer.cloneAndUpdateVariable(variable, selectedValue);
-}
-
-// Renders the OverlayController component to the overlay wrapper element.
-const overlayWrapper = document.getElementById("remixer-remote");
-function redraw(): void {
-  // variables = remixer.attachedInstance.variablesArray;
-
-  ReactDOM.render(
-    <OverlayController
-      wrapperElement={overlayWrapper}
-      variables={variables}
-      updateVariable={updateVariable}
-    />,
-    overlayWrapper,
-  );
-}
-
-// Add `redraw()` as a callback when selected value changes on a variable.
-variables.forEach((variable) => {
-  variable.addCallback(redraw);
-});
-
-redraw();
 
 export { RemoteController as remoteController };

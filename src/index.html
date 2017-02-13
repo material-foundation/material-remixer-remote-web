@@ -19,16 +19,11 @@
 <head>
   <meta charset="UTF-8" />
   <title>Remixer Remote</title>
-  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.min.css">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
-
-  <!-- <link rel="stylesheet" href="../node_modules/material-design-lite/material.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <script src="../node_modules/material-design-lite/material.min.js"></script> -->
-
-  <!--<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
-  <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script> -->
+  <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase-database.js"></script>
 </head>
 
 <body>
@@ -46,8 +41,6 @@
   </div>
 
   <script src="/assets/remoteController.js"></script>
-
-  <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
   <script>
     var config = {
       apiKey: "AIzaSyDSpY_SFxddoUybdhh6cc4rEUe7o_6ek8I",
@@ -55,16 +48,7 @@
       databaseURL: "https://remixer-16a0b.firebaseio.com",
     };
     firebase.initializeApp(config);
-
-    var remixerDB = firebase.database().ref('remixer/6c799194');
-    remixerDB.on('child_added', function(data) {
-      remoteController.sync(data.val());
-    });
-
-    remixerDB.on('child_changed', function(data) {
-      remoteController.sync(data.val());
-    });
-
+    remoteController.start();
   </script>
 </body>
 
