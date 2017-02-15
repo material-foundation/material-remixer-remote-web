@@ -76,14 +76,14 @@ class RemoteController {
    * @param {any} data The raw data received from firebase.
    */
    private syncData(data: any): void {
-       this.variables = [];
-       for (let key in data) {
-           let variable = LocalStorage.deserialize(data[key]);
-           if (variable instanceof Variable) {
-             this.variables.push(variable);
-           }
+     this.variables = [];
+     for (let key in data) {
+       let variable = LocalStorage.deserialize(data[key]);
+       if (variable instanceof Variable) {
+         this.variables.push(variable);
        }
-       this.redraw();
+     }
+     this.redraw();
    }
 
   /**
@@ -102,11 +102,11 @@ class RemoteController {
    * @param {string} key The key of the query value to return.
    * @return {string} The query value.
    */
-  private getUrlParam(key: string): string {
-      let regex = new RegExp(`[\\?&]${key}=([^&#]*)`);
-      let results = regex.exec(location.search);
-      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-  }
+   private getUrlParam(key: string): string {
+     let regex = new RegExp(`[\\?&]${key}=([^&#]*)`);
+     let results = regex.exec(location.search);
+     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+   }
 
   /**
    * Handles all control updates by setting the value on the firebase instance.
