@@ -44,12 +44,16 @@
 
   <script src="./remoteController.min.js"></script>
   <script>
+    // Set the firebase configuration for your app.
+    // TODO: Replace with your project's config object.
     var config = {
-      apiKey: "AIzaSyDSpY_SFxddoUybdhh6cc4rEUe7o_6ek8I",
-      authDomain: "remixer-16a0b.firebaseapp.com",
-      databaseURL: "https://remixer-16a0b.firebaseio.com",
+      apiKey: "apiKey",
+      authDomain: "projectId.firebaseapp.com",
+      databaseURL: "https://databaseName.firebaseio.com",
     };
     firebase.initializeApp(config);
+
+    // Start the remote controller.
     remoteController.start();
   </script>
 </body>
