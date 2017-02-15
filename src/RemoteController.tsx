@@ -25,12 +25,17 @@ import { LocalStorage } from "../node_modules/material-remixer/src/lib/LocalStor
 import { OverlayController } from "../node_modules/material-remixer/src/ui/OverlayController";
 import { Variable } from "../node_modules/material-remixer/src/core/variables/Variable";
 
-/** The globally exposed library MDL exposes as `window['componentHandler']` */
+/** The globally exposed library MDL exposes as `window['componentHandler']`. */
 declare var componentHandler: any;
 
-/** The globally exposed firebase library */
+/** The globally exposed firebase library. */
 declare var firebase: any;
 
+/**
+ * The RemoteController class is a singleton class that keeps displays of all
+ * the Remixer Variables and deals with saving/syncing its values.
+ * @class
+ */
 class RemoteController {
 
   /**
@@ -41,11 +46,22 @@ class RemoteController {
    */
   private static _sharedInstance = new RemoteController();
 
-  remixer: remixer = remixer.attachedInstance;
-  variables: Variable[] = [];
+  /**
+   * Intializes an instance of Remixer.
+   * @private
+   */
+  private remixer: remixer = remixer.attachedInstance;
 
   /**
-   * [config description]
+   * The array of remixer variables.
+   * @private
+   * @type {Variable[]]}
+   */
+  private variables: Variable[] = [];
+
+  /**
+   * Starts the remote controller.
+   * @static
    * @type {Object}
    */
   static start(config: {}): void {
@@ -55,8 +71,9 @@ class RemoteController {
   }
 
   /**
-   * [data description]
-   * @type {[type]}
+   * Syncs the data provided from firebase instance to remixer variables.
+   * @private
+   * @param {any} data The raw data received from firebase.
    */
    private syncData(data: any): void {
        this.variables = [];
@@ -79,8 +96,11 @@ class RemoteController {
   }
 
   /**
-   * [key description]
-   * @type {[type]}
+   * Parses the current `window.location` and returns the query search value
+   * for given key.
+   * @private
+   * @param {string} key The key of the query value to return.
+   * @return {string} The query value.
    */
   private getUrlParam(key: string): string {
       let regex = new RegExp(`[\\?&]${key}=([^&#]*)`);
@@ -89,8 +109,15 @@ class RemoteController {
   }
 
   /**
-   * [variable description]
-   * @type {[type]}
+   * Handles all control updates by setting the value on the firebase instance.
+   *
+   * To maintain immutability for React, an update here will trigger a new call
+   * to the `syncData` method which regnerates the array of avariables entirely.
+   * Doing so allows each control to handle its own `shouldComponentUpdate`
+   * method to determine if it should be re-rendered.
+   *
+   * @param {Variable} variable The variable to update.
+   * @param {any} selectedValue The new selected value.
    */
   private updateVariable(variable: Variable, selectedValue: any): void {
     if (variable.selectedValue !== selectedValue) {
@@ -99,9 +126,7 @@ class RemoteController {
     }
   }
 
-  /**
-   *
-   */
+  /** Renders the OverlayController component to the DOM. */
    private redraw(): void {
      const overlayWrapper = document.getElementById("remixer-remote");
        ReactDOM.render(
