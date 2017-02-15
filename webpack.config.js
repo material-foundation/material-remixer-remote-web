@@ -18,34 +18,27 @@
 
 const path = require('path');
 const webpack = require('webpack');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PACKAGE = require('./package.json');
 
-const PUBLIC_PATH = '/assets/';
+const PUBLIC_PATH = '/public/';
 const IS_DEV = process.env.RMX_ENV === 'development';
 const IS_PROD = process.env.RMX_ENV === 'production';
 
 module.exports = {
   entry: {
-    remixer: './node_modules/material-remixer/src/core/Remixer.ts',
     remoteController: './src/RemoteController.tsx'
   },
   output: {
-    path: path.resolve('./build'),
+    path: path.resolve('./public'),
     publicPath: PUBLIC_PATH,
     filename: '[name].' + (IS_PROD ? 'min.' : '') + 'js',
-    // filename: 'remixer-remote.' + (IS_PROD ? 'min.' : '') + 'js',
-    // filename: '[name].' + (IS_PROD ? 'min.' : '') + 'js',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
   devtool: IS_DEV ? 'source-map' : 'cheap-module-source-map',
   devServer: {
-    // publicPath: path.resolve('./build'),
-    // contentBase: path.join(__dirname, 'build'),
-    // open: true,
+    contentBase: path.resolve('./public'),
     inline: true,
-    // hot: true,
     port: 9000
   },
   performance: {
@@ -69,20 +62,13 @@ module.exports = {
       loader: 'html-loader'
     }],
   },
-  // externals: {
-  //   'react': 'React',
-  //   'react-dom': 'ReactDOM',
-  // },
   plugins: [
-    new webpack.BannerPlugin({
-      banner: `
-${PACKAGE.name}
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.BannerPlugin(`${PACKAGE.name}
 @version v${PACKAGE.version}
 @license ${PACKAGE.license}
 @copyright 2016 Google, Inc.
-@link ${PACKAGE.repository.url}`,
-      entryOnly: true
-    }),
-    // new ExtractTextPlugin('[name].[ext]')
+@link ${PACKAGE.repository.url}
+    `)
   ],
 };

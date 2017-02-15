@@ -2,6 +2,5 @@
 npm-debug.log
 node_modules
 build
-public
 coverage
 firebase-debug.log
