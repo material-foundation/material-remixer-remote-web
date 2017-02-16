@@ -24,8 +24,7 @@
     "clean": "del-cli public/**",
     "copy": "copyFiles -f src/*.{html,css,svg,ico} public",
     "deploy": "npm run build && firebase deploy",
-    "dev": "npm run build && cross-env RMX_ENV=development webpack-dev-server",
-    "serve": "npm run build && firebase serve"
+    "dev": "npm run build && cross-env RMX_ENV=development webpack-dev-server"
   },
   "devDependencies": {
     "@types/lodash.throttle": "^4.1.1",
