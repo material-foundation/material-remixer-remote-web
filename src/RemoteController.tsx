@@ -62,9 +62,8 @@ class RemoteController {
   /**
    * Starts the remote controller.
    * @static
-   * @type {Object}
    */
-  static start(config: {}): void {
+  static start(): void {
     this._sharedInstance.dbReference().on("value", (data: any) => {
       this._sharedInstance.syncData(data.val());
     });
