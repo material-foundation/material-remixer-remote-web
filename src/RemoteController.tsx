@@ -60,12 +60,21 @@ class RemoteController {
   private variables: Variable[] = [];
 
   /**
+   * The firebase database reference.
+   * @private
+   */
+  private dbReference: any;
+
+  /**
    * Starts the remote controller.
    * @static
    */
   static start(): void {
-    this._sharedInstance.dbReference().on("value", (data: any) => {
-      this._sharedInstance.syncData(data.val());
+    let instance = this._sharedInstance;
+    let remoteId = instance.getUrlParam("id");
+    instance.dbReference = firebase.database().ref(`remixer/${remoteId}`);
+    instance.dbReference.on("value", (data: any) => {
+      instance.syncData(data.val());
     });
   }
 
@@ -84,15 +93,6 @@ class RemoteController {
      }
      this.redraw();
    }
-
-  /**
-   * Returns a database reference to the remixer instance.
-   * @private
-   * @return {firebase.database.Reference} The firebase database reference.
-   */
-  private dbReference(): any {
-    return firebase.database().ref(`remixer/${this.getUrlParam("id")}`);
-  }
 
   /**
    * Parses the current `window.location` and returns the query search value
@@ -121,7 +121,7 @@ class RemoteController {
   private updateVariable(variable: Variable, selectedValue: any): void {
     if (variable.selectedValue !== selectedValue) {
       variable.selectedValue = selectedValue;
-      this.dbReference().child(variable.key).set(variable.serialize());
+      this.dbReference.child(variable.key).set(variable.serialize());
     }
   }
 
