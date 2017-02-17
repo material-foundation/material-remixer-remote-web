@@ -128,17 +128,17 @@ class RemoteController {
   /** Renders the OverlayController component to the DOM. */
    private redraw(): void {
      const overlayWrapper = document.getElementById("remixer-remote");
-       ReactDOM.render(
-         <OverlayController
-           wrapperElement={overlayWrapper}
-           variables={this.variables}
-           updateVariable={this.updateVariable.bind(this)}
-         />,
-         overlayWrapper,
-       );
+     ReactDOM.render(
+       <OverlayController
+         wrapperElement={overlayWrapper}
+         variables={this.variables}
+         updateVariable={this.updateVariable.bind(this)}
+       />,
+       overlayWrapper,
+     );
 
-       // Upgrade all registered MDL components that have been created dynamically.
-       componentHandler.upgradeAllRegistered();
+     // Upgrade all registered MDL components that have been created dynamically.
+     componentHandler.upgradeAllRegistered();
    }
  }
 
