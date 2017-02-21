@@ -73,9 +73,8 @@ class RemoteController {
     let instance = this._sharedInstance;
 
     // Get remoteId from pathname.
-    // (ie. https://<PROJECT-ID>/firebaseapp.com/<REMOTE-ID>)
+    // (ie. https://<PROJECT-ID>.firebaseapp.com/<REMOTE-ID>)
     let remoteId = location.pathname.split("/")[1];
-
 
     instance.dbReference = firebase.database().ref(`remixer/${remoteId}`);
     instance.dbReference.on("value", (data: any) => {
