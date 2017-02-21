@@ -71,7 +71,12 @@ class RemoteController {
    */
   static start(): void {
     let instance = this._sharedInstance;
-    let remoteId = instance.getUrlParam("id");
+
+    // Get remoteId from pathname.
+    // (ie. https://<PROJECT-ID>/firebaseapp.com/<REMOTE-ID>)
+    let remoteId = location.pathname.split("/")[1];
+
+
     instance.dbReference = firebase.database().ref(`remixer/${remoteId}`);
     instance.dbReference.on("value", (data: any) => {
       instance.syncData(data.val());
@@ -92,19 +97,6 @@ class RemoteController {
        }
      }
      this.redraw();
-   }
-
-  /**
-   * Parses the current `window.location` and returns the query search value
-   * for given key.
-   * @private
-   * @param {string} key The key of the query value to return.
-   * @return {string} The query value.
-   */
-   private getUrlParam(key: string): string {
-     let regex = new RegExp(`[\\?&]${key}=([^&#]*)`);
-     let results = regex.exec(location.search);
-     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
    }
 
   /**
