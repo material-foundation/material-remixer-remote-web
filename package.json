@@ -18,13 +18,16 @@
     "url": "https://github.com/material-foundation/material-remixer-remote-web/issues/"
   },
   "scripts": {
-    "build:dev": "mkdirp public && cross-env RMX_ENV=development webpack --progress --colors",
-    "build:prod": "mkdirp public && cross-env RMX_ENV=production webpack -p --progress --colors",
-    "build": "npm run clean && npm-run-all --parallel build:prod copy",
-    "clean": "del-cli public/**",
-    "copy": "copyFiles -f src/*.{html,css,svg,ico} public",
-    "deploy": "npm run build && firebase deploy",
-    "dev": "npm run build && cross-env RMX_ENV=development webpack-dev-server"
+    "build:dev": "mkdirp build && cross-env RMX_ENV=development webpack --progress --colors",
+    "build:prod": "mkdirp build && cross-env RMX_ENV=production webpack -p --progress --colors",
+    "build": "npm-run-all --parallel build:dev build:prod",
+    "clean:build": "del-cli build/**",
+    "clean:pub": "del-cli public/**",
+    "clean": "npm-run-all --parallel clean:build clean:pub",
+    "copy": "copyFiles -f src/*.{html,css,svg,ico} build/*.* public",
+    "deploy": "npm run dist && firebase deploy",
+    "dev": "npm run clean:build && npm run build && cross-env RMX_ENV=production webpack-dev-server",
+    "dist": "npm run clean && npm run build && npm run copy"
   },
   "devDependencies": {
     "@types/lodash.throttle": "^4.1.1",

@@ -20,7 +20,7 @@ const path = require('path');
 const webpack = require('webpack');
 const PACKAGE = require('./package.json');
 
-const PUBLIC_PATH = '/public/';
+const PUBLIC_PATH = '/';
 const IS_DEV = process.env.RMX_ENV === 'development';
 const IS_PROD = process.env.RMX_ENV === 'production';
 
@@ -29,7 +29,7 @@ module.exports = {
     remoteController: './src/RemoteController.tsx'
   },
   output: {
-    path: path.resolve('./public'),
+    path: path.resolve('./build'),
     publicPath: PUBLIC_PATH,
     filename: '[name].' + (IS_PROD ? 'min.' : '') + 'js',
     libraryTarget: 'umd',
@@ -37,7 +37,7 @@ module.exports = {
   },
   devtool: IS_DEV ? 'source-map' : 'cheap-module-source-map',
   devServer: {
-    contentBase: path.resolve('./public'),
+    contentBase: "src",
     inline: true,
     port: 9000
   },
