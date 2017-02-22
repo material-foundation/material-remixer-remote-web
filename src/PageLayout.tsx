@@ -14,31 +14,22 @@
  *  under the License.
  */
 
-body {
-  background-color: #f5f5f5;
-}
+import * as React from "react";
 
-.mdl-layout__header {
-  color: rgba(0, 0, 0, 0.8);
-  background-color: #fff;
-}
-
-.mdl-layout__header-row {
-  padding: 0 40px 0 40px;
-}
-
-.mdl-layout__header-row img {
-  height: 32px;
-}
-
-.page-content {
-  padding: 40px;
-}
-
-#remixer-remote .mdl-card {
-  background-color: #fff;
-}
-
-.mdl-card__title {
-  display: none;
+/** Returns a stateless page layout template. */
+export function PageLayout(props: any) {
+  return (
+    <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header className="mdl-layout__header">
+        <div className="mdl-layout__header-row">
+          <img src="remixer.svg" alt="Remixer Remote" />
+        </div>
+      </header>
+      <main className="mdl-layout__content">
+        <div className="page-content">
+          {props.children}
+        </div>
+      </main>
+    </div>
+  );
 }
