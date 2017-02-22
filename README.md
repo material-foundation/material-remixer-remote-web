@@ -4,18 +4,18 @@ In progress.  Not ready for use.
 
 ## Quickstart
 
-### 1. Sign up for Firebase.
+#### 1. Sign up for Firebase.
 
 Remixer remote will work with any new or existing Firebase account. It will use the [Firebase Hosting](https://firebase.google.com/docs/hosting/) feature to host this remote controller. If you don't have an existing Firebase account you wish to use, you can signup following instructions [here](https://firebase.google.com).
 
-### 2. Use `npm` to install the necessary dependencies.
+#### 2. Use `npm` to install the necessary dependencies.
 
 ```bash
 # Run the following script from root of this repo
 npm install
 ```
 
-### 3. Add your Firebase credentials.
+#### 3. Add your Firebase credentials.
 
 Add your Firebase credentials to the `index.html` file located in the `src` folder.
 
@@ -28,7 +28,7 @@ var config = {
 };
 ```
 
-### 4. Build and deploy the library to your Firebase Hosting account.
+#### 4. Build and deploy the library to your Firebase Hosting account.
 
 Running the following script will generate a new `public` folder first with all of the required files. It will then copy these files to your Firebase Hosting storage. 
 
@@ -37,7 +37,7 @@ Running the following script will generate a new `public` folder first with all 
 npm run deploy -- --project=<PROJECT_ID>
 ```
 
-### 5. Your site is now ready.
+#### 5. Your site is now ready.
 
 The Remixer remote controller will now be available at:
 ```
