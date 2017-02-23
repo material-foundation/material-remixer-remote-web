@@ -23,6 +23,7 @@ import { remixer } from "../node_modules/material-remixer/src/core/Remixer";
 import { ConstraintType, DataType } from "../node_modules/material-remixer/src/lib/Constants";
 import { LocalStorage } from "../node_modules/material-remixer/src/lib/LocalStorage";
 import { OverlayController } from "../node_modules/material-remixer/src/ui/OverlayController";
+import { PageLayout } from "./PageLayout";
 import { Variable } from "../node_modules/material-remixer/src/core/variables/Variable";
 
 /** The globally exposed library MDL exposes as `window['componentHandler']`. */
@@ -116,15 +117,17 @@ class RemoteController {
     }
   }
 
-  /** Renders the OverlayController component to the DOM. */
+  /** Renders the remote controller to the DOM. */
    private redraw(): void {
      const overlayWrapper = document.getElementById("remixer-remote");
      ReactDOM.render(
-       <OverlayController
-         wrapperElement={overlayWrapper}
-         variables={this.variables}
-         updateVariable={this.updateVariable.bind(this)}
-       />,
+       <PageLayout>
+         <OverlayController
+           wrapperElement={overlayWrapper}
+           variables={this.variables}
+           updateVariable={this.updateVariable.bind(this)}
+         />
+       </PageLayout>,
        overlayWrapper,
      );
 
