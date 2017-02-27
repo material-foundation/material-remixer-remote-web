@@ -1,6 +1,6 @@
 # Remixer Remote for Web
 
-Remixer helps teams use and refine design specs by providing an abstraction for these values that is accessible and configurable from both inside and outside the app itself.
+If enabled, the variables defined in your app will be exposed on a remote controller website that you can set up using Firebase hosting. Share the link to this site with your teammates from within the Remixer overlay or by emailing them. The remote controller allows updating the defined variables, and changes will be propagated in real-time across associated apps.
 
 **New to Remixer?** Visit our [main repo](https://github.com/material-foundation/material-remixer) to get a full description of what it is and how it works.
 - - -
