@@ -36,7 +36,7 @@ module.exports = function(config) {
       }]
     },
     files: [
-      'src/__tests__/*.ts?(x)',
+      'src/**/__tests__/*.ts?(x)',
     ],
     preprocessors: {
       'src/**/*.ts?(x)': ['webpack'],
