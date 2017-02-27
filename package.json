@@ -25,6 +25,7 @@
     "clean:pub": "del-cli public/**",
     "clean": "npm-run-all --parallel clean:build clean:pub",
     "copy": "copyFiles -f src/*.{html,css,svg,ico} build/*.* public",
+    "codecov": "cat coverage/*/lcov.info | codecov",
     "deploy": "npm run dist && firebase deploy",
     "dev": "npm run clean:build && npm run build && cross-env RMX_ENV=production webpack-dev-server",
     "dist": "npm run clean && npm run build && npm run copy",
