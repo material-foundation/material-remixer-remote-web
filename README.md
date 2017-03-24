@@ -1,5 +1,7 @@
 # Remixer Remote for Web
 
+[![Build Status](https://travis-ci.org/material-foundation/material-remixer-remote-web.svg?branch=develop)](https://travis-ci.org/material-foundation/material-remixer-remote-web) [![npm version](https://badge.fury.io/js/material-remixer-remote-web.svg)](https://badge.fury.io/js/material-remixer-remote-web)
+
 If enabled, the variables defined in your app will be exposed on a remote controller website that you can set up using Firebase hosting. Share the link to this site with your teammates from within the Remixer overlay or by emailing them. The remote controller allows updating the defined variables, and changes will be propagated in real-time across associated apps.
 
 **New to Remixer?** Visit our [main repo](https://github.com/material-foundation/material-remixer) to get a full description of what it is and how it works.
