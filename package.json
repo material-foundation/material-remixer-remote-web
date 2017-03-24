@@ -1,6 +1,6 @@
 {
   "name": "material-remixer-remote-web",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A hosted remote controller for a Remixer target app.",
   "homepage": "https://github.com/material-foundation/material-remixer",
   "author": "The Material Remixer Authors (see AUTHORS)",
