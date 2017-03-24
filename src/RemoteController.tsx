@@ -123,9 +123,10 @@ class RemoteController {
      ReactDOM.render(
        <PageLayout>
          <OverlayController
-           wrapperElement={overlayWrapper}
-           variables={this.variables}
+           toggleRemoteEnabled={null}
            updateVariable={this.updateVariable.bind(this)}
+           variables={this.variables}
+           wrapperElement={overlayWrapper}
          />
        </PageLayout>,
        overlayWrapper,
