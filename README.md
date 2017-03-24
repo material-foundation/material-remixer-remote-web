@@ -1,8 +1,12 @@
-# Remixer Remote for Web
+# <img align="center" src="https://cdn.rawgit.com/material-foundation/material-remixer-remote-web/develop/docs/assets/remixer_logo_32x32.png"> Remixer Remote for Web
+
+<img align="right" src="https://cdn.rawgit.com/material-foundation/material-remixer-remote-web/develop/docs/assets/app_screenshot.png" width="339px">
 
 [![Build Status](https://travis-ci.org/material-foundation/material-remixer-remote-web.svg?branch=develop)](https://travis-ci.org/material-foundation/material-remixer-remote-web) [![npm version](https://badge.fury.io/js/material-remixer-remote-web.svg)](https://badge.fury.io/js/material-remixer-remote-web)
 
 If enabled, the variables defined in your app will be exposed on a remote controller website that you can set up using Firebase hosting. Share the link to this site with your teammates from within the Remixer overlay or by emailing them. The remote controller allows updating the defined variables, and changes will be propagated in real-time across associated apps.
+
+If you are interested in using Remixer in another platform, you may want to check out the [iOS](https://github.com/material-foundation/material-remixer-ios), [Android](https://github.com/material-foundation/material-remixer-android), and [JavaScript](https://github.com/material-foundation/material-remixer-js) repos. With any of the three platforms you can use this Remote Controller to change the variables from a web dashboard.
 
 **New to Remixer?** Visit our [main repo](https://github.com/material-foundation/material-remixer) to get a full description of what it is and how it works.
 - - -
@@ -35,7 +39,7 @@ var config = {
 
 #### 4. Build and deploy the library to your Firebase Hosting account.
 
-Running the following script will generate a new `public` folder first with all of the required files. It will then copy these files to your Firebase Hosting storage. 
+Running the following script will generate a new `public` folder first with all of the required files. It will then copy these files to your Firebase Hosting storage.
 
 ```bash
 # Run the following script from root of this repo
@@ -48,21 +52,6 @@ The Remixer remote controller will now be available at:
 ```
 https://<PROJECT_ID>.firebaseapp.com/<REMOTE_ID>
 ```
-
-## State of development
-
-Visit our [State of Development](https://github.com/material-foundation/material-remixer/wiki/State-of-Development) wiki for the current roadmap and status of development for each platform.
-
-## Other Repositories
-
-The main Remixer GitHub repo for documentation, project tracking, and general information:
-- [Remixer docs](https://github.com/material-foundation/material-remixer)
-
-Other platform specific libraries and tools can be found in the following GitHub repos:
-
-- [iOS](https://github.com/material-foundation/material-remixer-ios) - Remixer for iOS.
-- [Android](https://github.com/material-foundation/material-remixer-android) - Remixer for Android.
-- [JavaScript](https://github.com/material-foundation/material-remixer-js) - Remixer for JavaScript.
 
 ## Is material-foundation affiliated with Google?
 
