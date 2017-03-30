@@ -1,6 +1,6 @@
 # <img align="center" src="https://cdn.rawgit.com/material-foundation/material-remixer-remote-web/develop/docs/assets/remixer_logo_32x32.png"> Remixer Remote for Web
 
-<img align="right" src="https://cdn.rawgit.com/material-foundation/material-remixer-remote-web/develop/docs/assets/app_screenshot.png" width="339px">
+<img align="right" src="https://cdn.rawgit.com/material-foundation/material-remixer-remote-web/develop/docs/assets/app_screenshot.png" width="340px">
 
 [![Build Status](https://travis-ci.org/material-foundation/material-remixer-remote-web.svg?branch=develop)](https://travis-ci.org/material-foundation/material-remixer-remote-web) [![npm version](https://badge.fury.io/js/material-remixer-remote-web.svg)](https://badge.fury.io/js/material-remixer-remote-web)
 
