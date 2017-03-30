@@ -69,6 +69,6 @@
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
-    "material-remixer": "^0.6.4"
+    "material-remixer": "^0.7.0"
   }
 }
