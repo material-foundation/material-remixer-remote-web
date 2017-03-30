@@ -110,7 +110,7 @@ class RemoteController {
    * @param {Variable} variable The variable to update.
    * @param {any} selectedValue The new selected value.
    */
-  private updateVariable(variable: Variable, selectedValue: any): void {
+  private updateVariable = (variable: Variable, selectedValue: any): void => {
     if (variable.selectedValue !== selectedValue) {
       variable.selectedValue = selectedValue;
       this.dbReference.child(variable.key).set(variable.serialize());
@@ -121,14 +121,16 @@ class RemoteController {
    private redraw(): void {
      const overlayWrapper = document.getElementById("remixer-remote");
      ReactDOM.render(
-       <PageLayout>
-         <OverlayController
-           toggleRemoteEnabled={null}
-           updateVariable={this.updateVariable.bind(this)}
-           variables={this.variables}
-           wrapperElement={overlayWrapper}
-         />
-       </PageLayout>,
+       <div>
+         <PageLayout>
+           <OverlayController
+             toggleRemoteEnabled={null}
+             updateVariable={this.updateVariable}
+             variables={this.variables}
+             wrapperElement={overlayWrapper}
+           />
+         </PageLayout>
+       </div>,
        overlayWrapper,
      );
 
