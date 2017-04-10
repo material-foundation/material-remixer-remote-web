@@ -19,8 +19,8 @@ body {
 }
 
 .mdl-layout__header {
+  background-color: #ffffff;
   color: rgba(0, 0, 0, 0.8);
-  background-color: #fff;
 }
 
 .mdl-layout__header-row {
@@ -36,7 +36,7 @@ body {
 }
 
 #remixer-remote .mdl-card {
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
 .mdl-card__title {

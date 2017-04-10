@@ -1,6 +1,6 @@
 {
   "name": "material-remixer-remote-web",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "description": "A hosted remote controller for a Remixer target app.",
   "homepage": "https://github.com/material-foundation/material-remixer",
   "author": "The Material Remixer Authors (see AUTHORS)",
@@ -29,7 +29,11 @@
     "deploy": "npm run dist && firebase deploy",
     "dev": "npm run clean:build && npm run build && cross-env RMX_ENV=production webpack-dev-server",
     "dist": "npm run clean && npm run build && npm run copy",
-    "test": "karma start"
+    "lint:ts": "tslint --fix --force 'src/**/*.ts?(x)'",
+    "lint:css": "lesshint src/*.css",
+    "lint": "npm-run-all --parallel lint:*",
+    "test": "karma start",
+    "test:watch": "karma start --no-single-run"
   },
   "devDependencies": {
     "@types/chai": "^3.4.35",
@@ -57,6 +61,7 @@
     "karma-webpack": "^2.0.2",
     "less": "^2.7.2",
     "less-loader": "^4.0.2",
+    "lesshint": "^3.1.1",
     "mkdirp": "^0.5.1",
     "mocha": "^3.2.0",
     "npm-run-all": "^4.0.2",
@@ -64,11 +69,12 @@
     "style-loader": "^0.16.1",
     "ts-loader": "^2.0.3",
     "tslint": "^4.0.2",
+    "tslint-react": "^2.5.0",
     "typescript": "^2.1.6",
     "webpack": "^2.3.2",
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
-    "material-remixer": "^0.7.0"
+    "material-remixer": "^1.0.0"
   }
 }

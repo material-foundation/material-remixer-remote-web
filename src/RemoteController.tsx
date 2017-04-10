@@ -14,17 +14,17 @@
  *  under the License.
  */
 
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 
-import "../node_modules/material-remixer/src/ui/styles/overlay.less";
+import '../node_modules/material-remixer/src/ui/styles/overlay.less';
 
-import { remixer } from "../node_modules/material-remixer/src/core/Remixer";
-import { ConstraintType, DataType } from "../node_modules/material-remixer/src/lib/Constants";
-import { LocalStorage } from "../node_modules/material-remixer/src/lib/LocalStorage";
-import { OverlayController } from "../node_modules/material-remixer/src/ui/OverlayController";
-import { PageLayout } from "./PageLayout";
-import { Variable } from "../node_modules/material-remixer/src/core/variables/Variable";
+import { remixer } from '../node_modules/material-remixer/src/core/Remixer';
+import { Variable } from '../node_modules/material-remixer/src/core/variables/Variable';
+import { ConstraintType, DataType } from '../node_modules/material-remixer/src/lib/Constants';
+import { LocalStorage } from '../node_modules/material-remixer/src/lib/LocalStorage';
+import { OverlayController } from '../node_modules/material-remixer/src/ui/OverlayController';
+import { PageLayout } from './PageLayout';
 
 /** The globally exposed library MDL exposes as `window['componentHandler']`. */
 declare var componentHandler: any;
@@ -71,14 +71,14 @@ class RemoteController {
    * @static
    */
   static start(): void {
-    let instance = this._sharedInstance;
+    const instance = this._sharedInstance;
 
     // Get remoteId from pathname.
     // (ie. https://<PROJECT-ID>.firebaseapp.com/<REMOTE-ID>)
-    let remoteId = location.pathname.split("/")[1];
+    const remoteId = location.pathname.split('/')[1];
 
     instance.dbReference = firebase.database().ref(`remixer/${remoteId}`);
-    instance.dbReference.on("value", (data: any) => {
+    instance.dbReference.on('value', (data: any) => {
       instance.syncData(data.val());
     });
   }
@@ -90,8 +90,8 @@ class RemoteController {
    */
    private syncData(data: any): void {
      this.variables = [];
-     for (let key in data) {
-       let variable = LocalStorage.deserialize(data[key]);
+     for (const key of Object.keys(data)) {
+       const variable = LocalStorage.deserialize(data[key]);
        if (variable instanceof Variable) {
          this.variables.push(variable);
        }
@@ -119,7 +119,7 @@ class RemoteController {
 
   /** Renders the remote controller to the DOM. */
    private redraw(): void {
-     const overlayWrapper = document.getElementById("remixer-remote");
+     const overlayWrapper = document.getElementById('remixer-remote');
      ReactDOM.render(
        <div>
          <PageLayout>
