@@ -75,7 +75,7 @@ We're excited you want to contribute to the project! Please read these docs so
 we can get your contributions submitted quickly.
 
 - [Contribution policy and guidelines](https://github.com/material-foundation/material-remixer-remote-web/blob/develop/CONTRIBUTING.md)
-- [Developing Remixer Remote for Web](https://github.com/material-foundation/material-remixer-js/blob/develop/docs/developing.md)
+- [Developing Remixer Remote for Web](https://github.com/material-foundation/material-remixer-remote-web/blob/develop/docs/developing.md)
 
 ## Is material-foundation affiliated with Google?
 
