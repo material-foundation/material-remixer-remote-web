@@ -14,19 +14,19 @@
  *  under the License.
  */
 
-import * as React from "react";
+import * as React from 'react';
 
 /** Returns a stateless page layout template. */
 export function PageLayout(props: any) {
   return (
-    <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-      <header className="mdl-layout__header">
-        <div className="mdl-layout__header-row">
-          <img src="remixer.svg" alt="Remixer Remote" />
+    <div className='mdl-layout mdl-js-layout mdl-layout--fixed-header'>
+      <header className='mdl-layout__header'>
+        <div className='mdl-layout__header-row'>
+          <img src='remixer.svg' alt='Remixer Remote' />
         </div>
       </header>
-      <main className="mdl-layout__content">
-        <div className="page-content">
+      <main className='mdl-layout__content'>
+        <div className='page-content'>
           {props.children}
         </div>
       </main>
