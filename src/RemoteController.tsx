@@ -56,7 +56,7 @@ class RemoteController {
   /**
    * The array of remixer variables.
    * @private
-   * @type {Variable[]]}
+   * @type {Variable[]}
    */
   private variables: Variable[] = [];
 
